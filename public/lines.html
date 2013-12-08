@@ -1,0 +1,51 @@
+<!--<script src="vendor/three.js/Three.js"></script>
+<script src="vendor/three.js/Detector.js"></script>
+<script src="vendor/three.js/Stats.js"></script>
+<script src="vendor/three.js/CopyShader.js"></script>
+<script src="vendor/three.js/DotScreenShader.js"></script>
+<script src="vendor/three.js/RGBShiftShader.js"></script>
+
+<script src="vendor/three.js/EffectComposer.js"></script>
+<script src="vendor/three.js/RenderPass.js"></script>
+<script src="vendor/three.js/MaskPass.js"></script>
+<script src="vendor/three.js/ShaderPass.js"></script>
+
+<script src="vendor/threex/THREEx.screenshot.js"></script>
+<script src="vendor/threex/THREEx.FullScreen.js"></script>
+<script src="vendor/threex/THREEx.WindowResize.js"></script>
+<script src="vendor/threex.dragpancontrols.js"></script>
+<script src="vendor/dat.gui.min.js"></script>-->
+<script src='vendor/three.min.js'></script>
+<script src='vendor/CopyShader.js'></script>
+<script src='vendor/VerticalBlurShader.js'></script>
+<script src='vendor/HorizontalBlurShader.js'></script>
+<script src='vendor/GlowShader.js'></script>
+<script src='vendor/RenderPass.js'></script>
+<script src='vendor/MaskPass.js'></script>
+<script src='vendor/ShaderPass.js'></script>
+<script src='vendor/EffectComposer.js'></script>
+
+<script type="x-shader/x-vertex" id="vertexShader">
+  // These have global scope
+
+  uniform vec3 color;
+  attribute float size;
+
+  varying vec3 vColor; // 'varying' vars are passed to the fragment shader
+
+  void main() {
+    vColor = color; // pass the color to the fragment shader
+    gl_PointSize = size;
+  }
+</script>
+
+<script type="x-shader/x-fragment" id="fragmentShader">
+  varying vec3 vColor;
+
+  void main() {
+    gl_FragColor = vec4(vColor, 0.5); // adjust the alpha
+  }
+</script>
+
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<script src='js/lines.js'></script>
