@@ -32,7 +32,7 @@ function init() {
   //renderer.render(scene, camera)
   composer = new THREE.EffectComposer(renderer);
   var renderPass = new THREE.RenderPass(scene, camera)
-  //var copyPass = new THREE.ShaderPass(THREE.CopyShader);
+  var copyPass = new THREE.ShaderPass(THREE.CopyShader);
   //copyPass.renderToScreen = true;
   composer.addPass(renderPass);
   //composer.addPass(copyPass);
@@ -67,28 +67,14 @@ function line(x, z) {
 }
 
 /*setInterval(function() {
-  var material = new THREE.MeshLambertMaterial({
-    color: 0x00ffff,
-    opacity: .5,
-    transparent: true
-  })
-  var geometry = new THREE.CylinderGeometry(.1, .1, 40, 50, 50, false)
-  var mesh = new THREE.Mesh(geometry, material)
-  mesh.position.x = -10
-  mesh.position.z = z
-  scene.add(mesh);
-  geometry = new THREE.CylinderGeometry(.1, .1, 40, 50, 50, false)
-  mesh = new THREE.Mesh(geometry, material)
-  mesh.position.x = 10
-  mesh.position.z = z
-  scene.add(mesh);
+  scene.add(line(10, z))
   z -= 10
 }, 300)*/
 
 function animate() {
   requestAnimationFrame(animate)
-  //camera.position.z -= 5
-  //pointLight.position.z -= 5
+  camera.position.z -= 5
+  pointLight.position.z -= 5
   //renderer.render(scene, camera);
   //composer.render()
 }
