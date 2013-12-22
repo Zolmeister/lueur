@@ -33,6 +33,9 @@ app.get('/', function(req, res) {
 app.get('/lines', function(req, res) {
 	res.sendfile('public/lines.html')
 });
+app.get('/beat', function(req, res) {
+	res.sendfile('public/beat.html')
+});
 app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){

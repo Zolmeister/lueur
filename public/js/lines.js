@@ -20,7 +20,7 @@ function init() {
   z -= 20
   scene.add(line(-10, z));
   scene.add(line(10, z));
-  z = Math.PI/2-20*Math.PI
+  //z = Math.PI/2-20*Math.PI
   scene.add(line(10, z));
 
   // create a point light
@@ -71,12 +71,12 @@ function line(x, z) {
   z -= 10
 }, 300)*/
 
-function animate() {
+function animate() { return
   requestAnimationFrame(animate)
-  camera.position.z -= 5
-  pointLight.position.z -= 5
+  camera.position.z -= .5
+  pointLight.position.z -= .5
   //renderer.render(scene, camera);
-  //composer.render()
+  composer.render()
 }
 
 window.onload = init
