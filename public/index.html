@@ -1,2 +1,37 @@
+<body>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+  
+<script src='vendor/three.min.js'></script>
+<script src='vendor/CopyShader.js'></script>
+<script src='vendor/VerticalBlurShader.js'></script>
+<script src='vendor/HorizontalBlurShader.js'></script>
+<script src='vendor/GlowShader.js'></script>
+<script src='vendor/RenderPass.js'></script>
+<script src='vendor/MaskPass.js'></script>
+<script src='vendor/ShaderPass.js'></script>
+<script src='vendor/EffectComposer.js'></script>
+
+<script type="x-shader/x-vertex" id="vertexShader">
+  // These have global scope
+
+  uniform vec3 color;
+  attribute float size;
+
+  varying vec3 vColor; // 'varying' vars are passed to the fragment shader
+
+  void main() {
+    vColor = color; // pass the color to the fragment shader
+    gl_PointSize = size;
+  }
+</script>
+
+<script type="x-shader/x-fragment" id="fragmentShader">
+  varying vec3 vColor;
+
+  void main() {
+    gl_FragColor = vec4(vColor, 0.5); // adjust the alpha
+  }
+</script>
 
 <script src='js/main.js'></script>
+</body>
