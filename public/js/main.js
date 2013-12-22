@@ -37,7 +37,7 @@ function avg(arr) {
 }
 
 // config
-var fft;
+var fft, buf;
 var last = 0;
 var samples = 32;
 
@@ -46,8 +46,35 @@ var renderer, camera, scene, pointLight, composer;
 var lines=[];
 //initAudio(update)
 
-initWebGL()
-initAudio(update)
+var filer = document.getElementById('filer')
+filer.ondragover = function () { return false; };
+filer.ondragend = function () { return false; };
+filer.ondrop = function (e) {
+  this.className = '';
+  e.preventDefault();
+  
+  
+  filer.textContent = 'Loading...'
+  var file = e.dataTransfer.files[0],
+      reader = new FileReader();
+  reader.onload = function (event) {
+    buf = event.target.result
+    initAudio(function(){
+      filer.style.display = 'none'
+      initWebGL()
+      update()
+    })
+    //console.log(event.target.result);
+    
+  };
+  console.log(file);
+  reader.readAsArrayBuffer(file);
+
+  return false;
+};
+
+//initWebGL()
+//initAudio(update)
 //newLine(.3)
 //composer.render()
 //update()
@@ -88,7 +115,7 @@ function line(x, z) {
   //var geometry = new THREE.CylinderGeometry(.1, .1, 40, 50, 50, false)
   var geometry = new THREE.CubeGeometry(1,100,1)
   var mesh = new THREE.Mesh(geometry, material)
-  mesh.position.x = x/2
+  mesh.position.x = x/4
   mesh.position.z = z
   mesh.rotation.z = z
   return mesh
@@ -122,7 +149,7 @@ function updateWebGL() {
 // this (overloaded) function creates a new web audio context,
 // fills it with a song, and creates a global fft object with the data
 function initAudio(cb) {
-  var buf;
+  //var buf;
 
   // get web audio context
   try {
@@ -132,20 +159,21 @@ function initAudio(cb) {
   }
 
   // get song
-  var req = new XMLHttpRequest();
+  /*var req = new XMLHttpRequest();
   req.open("GET", "music/spoon-camera.mp3", true);
   //we can't use jquery because we need the arraybuffer type
   req.responseType = "arraybuffer";
   req.onload = function () {
-    //decode the loaded data
-    ctx.decodeAudioData(req.response, function (buffer) {
+    //decode the loaded data*/
+    ctx.decodeAudioData(buf, function (buffer) {
       buf = buffer;
       console.log('song loaded')
       play();
       cb()
-    });
-  };
-  req.send();
+    })
+    /*});
+  };*/
+  //req.send();
   console.log("loading the song");
 
   // start playing song

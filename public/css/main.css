@@ -4,7 +4,7 @@ body {
 	margin		: 0;
 
 	color		: #fff;
-	background-color: #BBB;
+	background-color: #000;
 	font-family	: arial;
 	font-size	: 100%;
 }
@@ -36,4 +36,12 @@ body {
 	text-align: center;
 	background-color: #012;
 	font-size: 120px;
+}
+#filer {
+  font-size: 1in;
+  border: 5px dashed;
+  padding: 5px;
+  margin: 20px;
+  height: 50%;
+  text-align: center;
 }
